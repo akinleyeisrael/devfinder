@@ -1,3 +1,4 @@
+"use client"
 import { Button } from "@/components/ui/button";
 import { signIn, signOut, useSession } from "next-auth/react";
 import React from "react";
@@ -12,6 +13,7 @@ export const Header = () => {
                 ) : (
                     <Button onClick={() => signIn("google")}>SignIn</Button>
                 )}
+                {session.data?.user?.name}
             </div>
         </header>
     );
