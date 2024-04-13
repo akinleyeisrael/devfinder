@@ -2,7 +2,7 @@
 
 import { db } from "@/db";
 import { Room, room } from "@/db/schema";
-import { authConfig } from "@/lib/authConfig";
+import { authConfig } from "@/lib/auth";
 import { getServerSession } from "next-auth";
 import { revalidatePath } from "next/cache";
 

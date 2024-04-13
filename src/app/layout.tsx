@@ -3,10 +3,10 @@ import { ThemeProvider } from "@/components/theme-provider";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Header from "./header";
 import { Providers } from "./Providers";
 import { Toaster } from "@/components/ui/toaster";
 import NextTopLoader from "nextjs-toploader";
+import { Header } from "./header";
 
 
 const inter = Inter({ subsets: ["latin"] });

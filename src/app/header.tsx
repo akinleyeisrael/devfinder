@@ -1,17 +1,31 @@
-"use client"
+"use client";
+
 import { ModeToggle } from "@/components/mode-toggle";
-import { AlertDialogHeader, AlertDialogFooter } from "@/components/ui/alert-dialog";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { AlertDialog, AlertDialogContent, AlertDialogTitle, AlertDialogDescription, AlertDialogCancel, AlertDialogAction } from "@radix-ui/react-alert-dialog";
-import { DeleteIcon, LogInIcon, LogOutIcon } from "lucide-react";
 import { signIn, signOut, useSession } from "next-auth/react";
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { DeleteIcon, LogInIcon, LogOutIcon } from "lucide-react";
 import Image from "next/image";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
-import React, { useState } from "react";
-
-
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { useState } from "react";
+import { deleteAccountAction } from "./actions";
 
 function AccountDropdown() {
     const session = useSession();
@@ -30,14 +44,14 @@ function AccountDropdown() {
                     </AlertDialogHeader>
                     <AlertDialogFooter>
                         <AlertDialogCancel>Cancel</AlertDialogCancel>
-                        {/* <AlertDialogAction
+                        <AlertDialogAction
                             onClick={async () => {
                                 await deleteAccountAction();
                                 signOut({ callbackUrl: "/" });
                             }}
                         >
                             Yes, delete my account
-                        </AlertDialogAction> */}
+                        </AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>
@@ -77,7 +91,7 @@ function AccountDropdown() {
     );
 }
 
-export const Header = () => {
+export function Header() {
     const session = useSession();
     const isLoggedIn = !!session.data;
 
@@ -89,7 +103,7 @@ export const Header = () => {
                     className="flex gap-2 items-center text-xl hover:underline"
                 >
                     <Image
-                        src="/icon.jpeg"
+                        src="/icon.png"
                         width="60"
                         height="60"
                         alt="the application icon of a magnifying glass"
@@ -123,6 +137,4 @@ export const Header = () => {
             </div>
         </header>
     );
-};
-
-export default Header;
+}

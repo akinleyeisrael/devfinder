@@ -2,7 +2,7 @@ import { db } from "@/db";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import GoogleProvider from "next-auth/providers/google"
 import type { Adapter } from "next-auth/adapters";
-import {AuthOptions, DefaultSession, NextAuthOptions } from "next-auth";
+import { AuthOptions, DefaultSession, NextAuthOptions, getServerSession } from "next-auth";
 
 
 declare module "next-auth" {
@@ -58,3 +58,6 @@ export const authConfig = {
 
 } satisfies AuthOptions;
 
+export function getSession() {
+    return getServerSession(authConfig);
+}
