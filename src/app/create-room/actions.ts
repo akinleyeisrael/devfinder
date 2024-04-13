@@ -1,17 +1,20 @@
-"use server"
+"use server";
 
-import { db } from "@/db";
-import { Room, room } from "@/db/schema";
-import { authConfig } from "@/lib/auth";
-import { getServerSession } from "next-auth";
+import { createRoom } from "@/data-access/rooms";
+import { Room } from "@/db/schema";
+import { getSession } from "@/lib/auth";
 import { revalidatePath } from "next/cache";
 
-export async function CreateRoomAction(roomData: Omit<Room, "id" | "userId">) {
-    const session = await getServerSession(authConfig)
+export async function createRoomAction(roomData: Omit<Room, "id" | "userId">) {
+  const session = await getSession();
 
-    if (!session) {
-        throw new Error("you must be signed in")
-    }
-    await db.insert(room).values({ ...roomData, userId: session.user.id })
-    revalidatePath("/")
+  if (!session) {
+    throw new Error("you must be logged in to create this room");
+  }
+
+  const room = await createRoom(roomData, session.user.id);
+
+  revalidatePath("/browse");
+
+  return room;
 }
